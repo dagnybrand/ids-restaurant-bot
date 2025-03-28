@@ -1,6 +1,6 @@
 1. Import data and figure out how to load the JSON
-    a. make smaller datasets
-    b. use ClickHouse to query JSON files
+    a. make smaller datasets [x]
+    b. use ClickHouse to query JSON files [x]
 2. Define jobs for AI
     a. Query yelp_academic_dataset_business.json
         i. Given a city and a food type, search for open restaurants with the highest stars 
