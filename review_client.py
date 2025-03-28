@@ -9,7 +9,7 @@ class ReviewClient:
         query = f"""
         SELECT b.name, b.stars, b.review_count FROM '{self.data_dir}/business.json' as b
         WHERE b.city = '{city.replace("'", "''")}' AND b.is_open=1 AND b.categories LIKE '%{cuisine.replace("'", "''")}%'
-        ORDER BY b.stars DESC
+        ORDER BY (3.5 * 50 + b.review_count * b.stars) / (50 + b.review_count) DESC
         {'LIMIT ' + str(limit) if limit is not None else ''}
         """
 
@@ -23,9 +23,18 @@ class ReviewClient:
         {'LIMIT ' + str(limit) if limit is not None else ''}"""
 
         return chdb.query(query, "Dataframe")
+
+    def get_average_rating(self) -> float:
+        query = f"""
+        SELECT AVG(b.stars) as average_rating FROM '{self.data_dir}/business.json' as b 
+        """
+        
+        result = chdb.query(query, "Dataframe")
+        return result
     
 if __name__ == '__main__':
-    rc = ReviewClient('./indianapolis_data')
+    rc = ReviewClient('./data')
     # rc.filter_cities('Indianapolis')
-    print(rc.get_tips("Yannis Golden Gyros", limit=5)) 
+    # print(rc.get_tips("Yannis Golden Gyros", limit=5)) 
     print(rc.get_restaurants('Indianapolis', 'American', limit=5))
+    # print(rc.get_average_rating())
