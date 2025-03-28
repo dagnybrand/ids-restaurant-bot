@@ -15,26 +15,52 @@ class ReviewClient:
 
         return chdb.query(query, "Dataframe")
     
-    def get_tips(self, business_name: str, limit: int | None = None) -> pd.DataFrame:
+    def find_business_id_by_name(self, business_name: str) -> str | None:
         query = f"""
-        SELECT t.text FROM '{self.data_dir}/business.json' as b 
-        LEFT OUTER JOIN '{self.data_dir}/tip.json' as t ON b.business_id = t.business_id
-        WHERE b.name = '{business_name.replace("'", "''")}'
+        SELECT b.business_id FROM '{self.data_dir}/business.json' as b
+        WHERE name = '{business_name.replace("'", "''")}'
+        LIMIT 1
+        """
+
+        df = chdb.query(query, "Dataframe")
+        return df['business_id'].values[0] if not df.empty else None
+
+    def get_reviews(self, business_name: str, limit: int | None = None, sort: str | None = None) -> pd.DataFrame:
+        business_id = self.find_business_id_by_name(business_name)
+        if not business_id:
+            return pd.DataFrame()
+        
+        query = f"""
+        SELECT r.* FROM '{self.data_dir}/business.json' as b 
+        LEFT OUTER JOIN '{self.data_dir}/review.json' as r ON b.business_id = r.business_id
+        WHERE b.name = '{business_name.replace("'", "''")}' and r.text IS NOT NULL
+        {'ORDER BY ' + sort if sort is not None else ''}
         {'LIMIT ' + str(limit) if limit is not None else ''}"""
 
-        return chdb.query(query, "Dataframe")
-
-    def get_average_rating(self) -> float:
-        query = f"""
-        SELECT AVG(b.stars) as average_rating FROM '{self.data_dir}/business.json' as b 
-        """
+        df = chdb.query(query, "Dataframe")
+        df['date'] = pd.to_datetime(df['date'], unit='s')
+        return df
+    
+    def get_tips(self, business_name: str, limit: int | None = None, sort: str | None = None) -> pd.DataFrame:
+        business_id = self.find_business_id_by_name(business_name)
+        if not business_id:
+            return pd.DataFrame()
         
-        result = chdb.query(query, "Dataframe")
-        return result
+        query = f"""
+        SELECT t.* FROM '{self.data_dir}/tip.json' as t
+        WHERE t.business_id = '{business_id}' and t.text IS NOT NULL
+        {'ORDER BY ' + sort if sort is not None else ''}
+        {'LIMIT ' + str(limit) if limit is not None else ''}"""
+
+        df = chdb.query(query, "Dataframe")
+        df['date'] = pd.to_datetime(df['date'], unit = 's')
+        return df
     
 if __name__ == '__main__':
-    rc = ReviewClient('./data')
+    rc = ReviewClient('./indianapolis_data')
     # rc.filter_cities('Indianapolis')
-    # print(rc.get_tips("Yannis Golden Gyros", limit=5)) 
-    print(rc.get_restaurants('Indianapolis', 'American', limit=5))
+    #result = rc.find_business_id_by_name("McDonald's")
+    df = rc.get_tips("McDonald's", sort='t.date DESC', limit=5)
+    print(df)
+    # print(rc.get_restaurants('Indianapolis', 'American', limit=5))
     # print(rc.get_average_rating())
