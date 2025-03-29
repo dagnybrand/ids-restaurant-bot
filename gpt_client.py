@@ -1,6 +1,6 @@
 import openai
 
-DEFAULT_SYSTEM_PROMPT = "Think critically about the following."
+DEFAULT_SYSTEM_PROMPT = "You are a helpful assistant that is part of a restaurant recommendation system. Your task is to provide concise and accurate summaries of provided restaurant data. You will recieve information about restaurants, reviews, tips, user profiles, and other relevant data. Your responses should be clear and to the point, focusing on the key details that will help users make informed decisions about where to eat."
 
 class GPTClient:
     def __init__(self, api_key: str, model_name: str = "gpt-4o-mini", system_prompt: str | None = None) -> None:
