@@ -5,6 +5,16 @@ class ReviewClient:
     def __init__(self, data_dir: str):
         self.data_dir = data_dir
 
+    def __find_business_id_by_name(self, business_name: str) -> str | None:
+        query = f"""
+        SELECT b.business_id FROM '{self.data_dir}/business.json' as b
+        WHERE name = '{business_name.replace("'", "''")}'
+        LIMIT 1
+        """
+
+        df = chdb.query(query, "Dataframe")
+        return df['business_id'].values[0] if not df.empty else None
+    
     def get_restaurants(self, city: str, cuisine: str, limit: int | None = None) -> pd.DataFrame:
         query = f"""
         SELECT b.name, b.stars, b.review_count FROM '{self.data_dir}/business.json' as b
@@ -14,19 +24,9 @@ class ReviewClient:
         """
 
         return chdb.query(query, "Dataframe")
-    
-    def find_business_id_by_name(self, business_name: str) -> str | None:
-        query = f"""
-        SELECT b.business_id FROM '{self.data_dir}/business.json' as b
-        WHERE name = '{business_name.replace("'", "''")}'
-        LIMIT 1
-        """
-
-        df = chdb.query(query, "Dataframe")
-        return df['business_id'].values[0] if not df.empty else None
 
     def get_reviews(self, business_name: str, limit: int | None = None, sort: str | None = None) -> pd.DataFrame:
-        business_id = self.find_business_id_by_name(business_name)
+        business_id = self.__find_business_id_by_name(business_name)
         if not business_id:
             return pd.DataFrame()
         
@@ -42,7 +42,7 @@ class ReviewClient:
         return df
     
     def get_tips(self, business_name: str, limit: int | None = None, sort: str | None = None) -> pd.DataFrame:
-        business_id = self.find_business_id_by_name(business_name)
+        business_id = self.__find_business_id_by_name(business_name)
         if not business_id:
             return pd.DataFrame()
         
@@ -58,9 +58,5 @@ class ReviewClient:
     
 if __name__ == '__main__':
     rc = ReviewClient('./indianapolis_data')
-    # rc.filter_cities('Indianapolis')
-    #result = rc.find_business_id_by_name("McDonald's")
-    df = rc.get_tips("McDonald's", sort='t.date DESC', limit=5)
+    df = rc.get_reviews("McDonald's", sort='r.useful DESC', limit=5)
     print(df)
-    # print(rc.get_restaurants('Indianapolis', 'American', limit=5))
-    # print(rc.get_average_rating())
