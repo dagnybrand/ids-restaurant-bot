@@ -17,7 +17,7 @@ class ReviewClient:
     
     def get_restaurants(self, city: str, cuisine: str, limit: int | None = None) -> pd.DataFrame:
         query = f"""
-        SELECT b.name, b.stars, b.review_count FROM '{self.data_dir}/business.json' as b
+        SELECT b.* FROM '{self.data_dir}/business.json' as b
         WHERE b.city = '{city.replace("'", "''")}' AND b.is_open=1 AND b.categories LIKE '%{cuisine.replace("'", "''")}%'
         ORDER BY (3.5 * 50 + b.review_count * b.stars) / (50 + b.review_count) DESC
         {'LIMIT ' + str(limit) if limit is not None else ''}
@@ -58,5 +58,6 @@ class ReviewClient:
     
 if __name__ == '__main__':
     rc = ReviewClient('./indianapolis_data')
-    df = rc.get_reviews("McDonald's", sort='r.useful DESC', limit=5)
+    df= rc.get_restaurants("Indianapolis", "American", limit=5).to_string(index=False)
+    # df = rc.get("Yannis Golden Gyros", sort='t.date DESC', limit=5).to_string(index=False)
     print(df)
