@@ -15,6 +15,18 @@ class ReviewClient:
         df = chdb.query(query, "Dataframe")
         return df['business_id'].values[0] if not df.empty else None
     
+    # def get_restaurants(self, city: str, cuisine: str, amenities: list, limit: int | None = None) -> pd.DataFrame:
+    #     amenities = ','.join(amenities)
+    #     query = f"""
+    #     SELECT b.* FROM '{self.data_dir}/business.json' as b
+    #     WHERE b.city = '{city.replace("'", "''")}' AND b.is_open=1 AND b.categories LIKE '%{cuisine.replace("'", "''")}%'
+    #     AND b.attributes LIKE '%{amenities.replace("'", "''")}%'
+    #     ORDER BY (3.5 * 50 + b.review_count * b.stars) / (50 + b.review_count) DESC
+    #     {'LIMIT ' + str(limit) if limit is not None else ''}
+    #     """
+
+    #     return chdb.query(query, "Dataframe")
+    
     def get_restaurants(self, city: str, cuisine: str, limit: int | None = None) -> pd.DataFrame:
         query = f"""
         SELECT b.* FROM '{self.data_dir}/business.json' as b
@@ -58,6 +70,7 @@ class ReviewClient:
     
 if __name__ == '__main__':
     rc = ReviewClient('./indianapolis_data')
+    #rc = ReviewClient('./data')
     df= rc.get_restaurants("Indianapolis", "American", limit=5).to_string(index=False)
     # df = rc.get("Yannis Golden Gyros", sort='t.date DESC', limit=5).to_string(index=False)
     print(df)

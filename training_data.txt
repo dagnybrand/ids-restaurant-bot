@@ -1,0 +1,407 @@
+QUERY:
+Find 3 highly rated coffee shops in Seattle
+
+RESPONSE:
+df = rc.get_restaurants("Seattle", "Coffee", limit=3)  
+response = gpt.summarize_businesses(df)  
+print(response) 
+
+QUERY:
+List 4 sushi restaurants in Los Angeles
+
+RESPONSE:
+df = rc.get_restaurants("Los Angeles", "Sushi", limit=4)  
+response = gpt.summarize_businesses(df)  
+print(response)
+
+QUERY:
+Find 6 pizza places in New York City
+
+RESPONSE:
+df = rc.get_restaurants("New York City", "Pizza", limit=6)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+Give me 5 best-rated steakhouses in Dallas
+
+RESPONSE:
+df = rc.get_restaurants("Dallas", "Steakhouse", limit=5)  
+response = gpt.summarize_businesses(df)  
+print(response) 
+
+QUERY:
+List 4 seafood restaurants in San Francisco
+
+RESPONSE:
+df = rc.get_restaurants("San Francisco", "Seafood", limit=4)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+Find 3 best taco spots in San Diego
+
+RESPONSE:
+df = rc.get_restaurants("San Diego", "Tacos", limit=3)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+I'm looking for 6 places in Denver that serve amazing tacos.
+
+RESPONSE:
+df = rc.get_restaurants("Denver", "Tacos", limit=6)  
+response = gpt.summarize_businesses(df)  
+print(response) 
+
+QUERY:
+Find me 4 seafood restaurants in Seattle worth checking out.
+
+RESPONSE:
+df = rc.get_restaurants("Seattle", "Seafood", limit=4)  
+response = gpt.summarize_businesses(df)  
+print(response) 
+
+QUERY:
+Point me to 3 top-notch ramen shops in San Francisco.
+
+RESPONSE:
+df = rc.get_restaurants("San Francisco", "Ramen", limit=3, sort_by="rating")  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+Where should I go for barbecue in Austin? Give me 5 options.
+
+RESPONSE:
+df = rc.get_restaurants("Austin", "Barbecue", limit=5)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+What do people say about Joe’s BBQ?
+
+RESPONSE:
+df = rc.get_reviews("Joe’s BBQ", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+Can you give me a summary of reviews for Bella Trattoria?
+
+RESPONSE:
+df = rc.get_reviews("Bella Trattoria", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)
+
+QUERY:
+Pull up 5 reviews for The Golden Spoon.
+
+RESPONSE:
+df = rc.get_reviews("The Golden Spoon", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+Tell me what customers think of Ocean View Sushi.
+
+RESPONSE:
+df = rc.get_reviews("Ocean View Sushi", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+Can you find reviews for The Tasty Taco?
+
+RESPONSE:
+df = rc.get_reviews("The Tasty Taco", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response) 
+
+QUERY:
+Give me some insights on how people feel about The Cozy Diner.
+
+RESPONSE:
+df = rc.get_reviews("The Cozy Diner", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+What are diners saying about Green Leaf Vegan Café?
+
+RESPONSE:
+df = rc.get_reviews("Green Leaf Vegan Café", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY: 
+I’m considering trying Joe’s BBQ. Any tips?
+
+RESPONSE:
+df = rc.get_tips("Joe’s BBQ", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY: 
+What should I know before visiting Bella Trattoria?
+
+RESPONSE:
+df = rc.get_tips("Bella Trattoria", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY: 
+Thinking about grabbing a coffee at Central Perk Café. Any advice?
+
+RESPONSE:
+df = rc.get_tips("Central Perk Café", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY: 
+I’m planning to eat at The Golden Spoon. What do I need to know?
+
+RESPONSE:
+df = rc.get_tips("The Golden Spoon", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY: 
+Any must-know tips for visiting Ocean View Sushi?
+
+RESPONSE:
+df = rc.get_tips("Ocean View Sushi", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY: 
+Before I go to The Tasty Taco, what should I expect?
+
+RESPONSE:
+df = rc.get_tips("The Tasty Taco", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY: 
+Heading to The Cozy Diner tonight. Any recommendations?
+
+RESPONSE:
+df = rc.get_tips("The Cozy Diner", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY: 
+What’s good to know before visiting Green Leaf Vegan Café?
+
+RESPONSE:
+df = rc.get_tips("Green Leaf Vegan Café", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY:
+Give me 5 restaurants in Indianapolis where I can get a good burger
+
+RESPONSE:
+df = rc.get_restaurants("Indianapolis", "Burger", limit=5)
+response = gpt.summarize_businesses(df)
+print(response)
+
+QUERY: 
+Could I have a review of Ardmore Pizza?
+
+RESPONSE:
+df = rc.get_reviews("Ardmore Pizza", limit=5)
+response = gpt.summarize_reviews(df)
+print(response)
+
+QUERY:
+I'm thinking about going to Bar-B-Cutie. What should I know?
+
+RESPONSE:
+df = rc.get_tips("Bar-B-Cutie", limit=5)
+response = gpt.summarize_tips(df)
+print(response)
+
+QUERY:
+Recommend 3 top-rated bakeries in Chicago.
+
+RESPONSE:
+df = rc.get_restaurants("Chicago", "Bakery", limit=3)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+Show me 4 excellent vegetarian restaurants in Portland.
+
+RESPONSE:
+df = rc.get_restaurants("Portland", "Vegetarian", limit=4)  
+response = gpt.summarize_businesses(df)  
+print(response) 
+
+QUERY:
+Locate 5 well-reviewed burger spots in Nashville.
+
+RESPONSE:
+df = rc.get_restaurants("Nashville", "Burger", limit=5)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+Find 6 great Italian places in Philadelphia.
+
+RESPONSE:
+df = rc.get_restaurants("Philadelphia", "Italian", limit=6)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+Suggest 4 seafood spots in Boston worth visiting.
+
+RESPONSE:
+df = rc.get_restaurants("Boston", "Seafood", limit=4)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+Where can I get 3 amazing ramen bowls in Los Angeles?
+
+RESPONSE:
+df = rc.get_restaurants("Los Angeles", "Ramen", limit=3)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+Tell me about 5 highly rated BBQ places in Kansas City.
+
+RESPONSE:
+df = rc.get_restaurants("Kansas City", "BBQ", limit=5)  
+response = gpt.summarize_businesses(df)  
+print(response)  
+
+QUERY:
+What are the best-reviewed donut shops in Atlanta? Give me 4.
+
+RESPONSE:
+df = rc.get_restaurants("Atlanta", "Donuts", limit=4)  
+response = gpt.summarize_businesses(df)  
+print(response) 
+
+QUERY:
+What do customers say about The Spicy Dragon?
+
+RESPONSE:
+df = rc.get_reviews("The Spicy Dragon", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+Can I get a summary of reviews for Bella Napoli?
+
+RESPONSE:
+df = rc.get_reviews("Bella Napoli", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+Fetch 5 reviews for The Daily Grind Café.
+
+RESPONSE:
+df = rc.get_reviews("The Daily Grind Café", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+What’s the word on Captain’s Catch Seafood?
+
+RESPONSE:
+df = rc.get_reviews("Captain’s Catch Seafood", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+Can you pull up customer feedback for Taco Haven?
+
+RESPONSE:
+df = rc.get_reviews("Taco Haven", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+Any thoughts from customers about Cozy Corner Deli?
+
+RESPONSE:
+df = rc.get_reviews("Cozy Corner Deli", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response)  
+
+QUERY:
+What do diners say about The Plant-Based Pantry?
+
+RESPONSE:
+df = rc.get_reviews("The Plant-Based Pantry", limit=5)  
+response = gpt.summarize_reviews(df)  
+print(response) 
+
+QUERY:
+I’m planning to visit Smoky’s BBQ. Any helpful tips?
+
+RESPONSE:
+df = rc.get_tips("Smoky’s BBQ", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY:
+What should I know before dining at La Bella Pasta?
+
+RESPONSE:
+df = rc.get_tips("La Bella Pasta", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY:
+Any advice for first-time visitors to Daily Dose Coffee?
+
+RESPONSE:
+df = rc.get_tips("Daily Dose Coffee", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY:
+I’m heading to The Elegant Spoon tonight. What should I expect?
+
+RESPONSE:
+df = rc.get_tips("The Elegant Spoon", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY:
+Share some insider tips for enjoying Ocean’s Delight Sushi.
+
+RESPONSE:
+df = rc.get_tips("Ocean’s Delight Sushi", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY:
+Before I grab tacos at Fiesta Mexicana, what should I know?
+
+RESPONSE:
+df = rc.get_tips("Fiesta Mexicana", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY:
+I’m considering The Homestyle Kitchen for dinner. Any suggestions?
+
+RESPONSE:
+df = rc.get_tips("The Homestyle Kitchen", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
+
+QUERY:
+What’s useful to know about visiting Fresh Greens Vegan Café?
+RESPONSE:
+
+df = rc.get_tips("Fresh Greens Vegan Café", limit=5)  
+response = gpt.summarize_tips(df)  
+print(response)  
