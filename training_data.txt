@@ -400,8 +400,8 @@ print(response)
 
 QUERY:
 What’s useful to know about visiting Fresh Greens Vegan Café?
-RESPONSE:
 
+RESPONSE:
 df = rc.get_tips("Fresh Greens Vegan Café", limit=5)  
 response = gpt.summarize_tips(df)  
 print(response)  
