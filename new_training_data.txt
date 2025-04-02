@@ -1,0 +1,357 @@
+QUERY:
+Find 3 highly rated coffee shops in Seattle
+
+RESPONSE:
+GET RESTAURANT "SEATTLE" "COFFEE" 3
+SUMMARIZE BUSINESSES 
+
+QUERY:
+List 4 sushi restaurants in Los Angeles
+
+RESPONSE:
+GET RESTAURANT "LOS ANGELES" "SUSHI" 4
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Find 6 pizza places in New York City
+
+RESPONSE:
+GET RESTAURANT "NEW YORK CITY" "PIZZA" 6
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Give me 5 best-rated steakhouses in Dallas
+
+RESPONSE:
+GET RESTAURANT "DALLAS" "STEAKHOUSE" 5
+SUMMARIZE BUSINESSES 
+
+QUERY:
+List 4 seafood restaurants in San Francisco
+
+RESPONSE:
+GET RESTAURANT "SAN FRANCISCO" "SEAFOOD" 4
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Find 3 best taco spots in San Diego
+
+RESPONSE:
+GET RESTAURANT "SAN DIEGO" "TACOS" 3
+SUMMARIZE BUSINESSES 
+
+QUERY:
+I'm looking for 6 places in Denver that serve amazing tacos.
+
+RESPONSE:
+GET RESTAURANT "DENVER" "TACOS" 6
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Find me 4 seafood restaurants in Seattle worth checking out.
+
+RESPONSE:
+GET RESTAURANT "SEATTLE" "SEAFOOD" 4
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Point me to 3 top-notch ramen shops in San Francisco.
+
+RESPONSE:
+GET RESTAURANT "SAN FRANCISCO" "RAMEN" 3
+ SORT_BY="RATING"  
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Where should I go for barbecue in Austin? Give me 5 options.
+
+RESPONSE:
+GET RESTAURANT "AUSTIN" "BARBECUE" 5
+SUMMARIZE BUSINESSES 
+
+QUERY:
+What do people say about Joe’s BBQ?
+
+RESPONSE:
+GET REVIEW "JOE’S BBQ" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Can you give me a summary of reviews for Bella Trattoria?
+
+RESPONSE:
+GET REVIEW "BELLA TRATTORIA" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Pull up 5 reviews for The Golden Spoon.
+
+RESPONSE:
+GET REVIEW "THE GOLDEN SPOON" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Tell me what customers think of Ocean View Sushi.
+
+RESPONSE:
+GET REVIEW "OCEAN VIEW SUSHI" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Can you find reviews for The Tasty Taco?
+
+RESPONSE:
+GET REVIEW "THE TASTY TACO" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Give me some insights on how people feel about The Cozy Diner.
+
+RESPONSE:
+GET REVIEW "THE COZY DINER" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+What are diners saying about Green Leaf Vegan Café?
+
+RESPONSE:
+GET REVIEW "GREEN LEAF VEGAN CAFÉ" 5
+SUMMARIZE REVIEWS 
+
+QUERY: 
+I’m considering trying Joe’s BBQ. Any tips?
+
+RESPONSE:
+GET TIPS "JOE’S BBQ" 5
+SUMMARIZE TIPS 
+
+QUERY: 
+What should I know before visiting Bella Trattoria?
+
+RESPONSE:
+GET TIPS "BELLA TRATTORIA" 5
+SUMMARIZE TIPS 
+
+QUERY: 
+Thinking about grabbing a coffee at Central Perk Café. Any advice?
+
+RESPONSE:
+GET TIPS "CENTRAL PERK CAFÉ" 5
+SUMMARIZE TIPS 
+
+QUERY: 
+I’m planning to eat at The Golden Spoon. What do I need to know?
+
+RESPONSE:
+GET TIPS "THE GOLDEN SPOON" 5
+SUMMARIZE TIPS 
+
+QUERY: 
+Any must-know tips for visiting Ocean View Sushi?
+
+RESPONSE:
+GET TIPS "OCEAN VIEW SUSHI" 5
+SUMMARIZE TIPS 
+
+QUERY: 
+Before I go to The Tasty Taco, what should I expect?
+
+RESPONSE:
+GET TIPS "THE TASTY TACO" 5
+SUMMARIZE TIPS 
+
+QUERY: 
+Heading to The Cozy Diner tonight. Any recommendations?
+
+RESPONSE:
+GET TIPS "THE COZY DINER" 5
+SUMMARIZE TIPS 
+
+QUERY: 
+What’s good to know before visiting Green Leaf Vegan Café?
+
+RESPONSE:
+GET TIPS "GREEN LEAF VEGAN CAFÉ" 5
+SUMMARIZE TIPS 
+
+QUERY:
+Give me 5 restaurants in Indianapolis where I can get a good burger
+
+RESPONSE:
+GET RESTAURANT "INDIANAPOLIS" "BURGER" 5
+SUMMARIZE BUSINESSES 
+
+QUERY: 
+Could I have a review of Ardmore Pizza?
+
+RESPONSE:
+GET REVIEW "ARDMORE PIZZA" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+I'm thinking about going to Bar-B-Cutie. What should I know?
+
+RESPONSE:
+GET TIPS "BAR-B-CUTIE" 5
+SUMMARIZE TIPS 
+
+QUERY:
+Recommend 3 top-rated bakeries in Chicago.
+
+RESPONSE:
+GET RESTAURANT "CHICAGO" "BAKERY" 3
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Show me 4 excellent vegetarian restaurants in Portland.
+
+RESPONSE:
+GET RESTAURANT "PORTLAND" "VEGETARIAN" 4
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Locate 5 well-reviewed burger spots in Nashville.
+
+RESPONSE:
+GET RESTAURANT "NASHVILLE" "BURGER" 5
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Find 6 great Italian places in Philadelphia.
+
+RESPONSE:
+GET RESTAURANT "PHILADELPHIA" "ITALIAN" 6
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Suggest 4 seafood spots in Boston worth visiting.
+
+RESPONSE:
+GET RESTAURANT "BOSTON" "SEAFOOD" 4
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Where can I get 3 amazing ramen bowls in Los Angeles?
+
+RESPONSE:
+GET RESTAURANT "LOS ANGELES" "RAMEN" 3
+SUMMARIZE BUSINESSES 
+
+QUERY:
+Tell me about 5 highly rated BBQ places in Kansas City.
+
+RESPONSE:
+GET RESTAURANT "KANSAS CITY" "BBQ" 5
+SUMMARIZE BUSINESSES 
+
+QUERY:
+What are the best-reviewed donut shops in Atlanta? Give me 4.
+
+RESPONSE:
+GET RESTAURANT "ATLANTA" "DONUTS" 4
+SUMMARIZE BUSINESSES 
+
+QUERY:
+What do customers say about The Spicy Dragon?
+
+RESPONSE:
+GET REVIEW "THE SPICY DRAGON" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Can I get a summary of reviews for Bella Napoli?
+
+RESPONSE:
+GET REVIEW "BELLA NAPOLI" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Fetch 5 reviews for The Daily Grind Café.
+
+RESPONSE:
+GET REVIEW "THE DAILY GRIND CAFÉ" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+What’s the word on Captain’s Catch Seafood?
+
+RESPONSE:
+GET REVIEW "CAPTAIN’S CATCH SEAFOOD" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Can you pull up customer feedback for Taco Haven?
+
+RESPONSE:
+GET REVIEW "TACO HAVEN" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+Any thoughts from customers about Cozy Corner Deli?
+
+RESPONSE:
+GET REVIEW "COZY CORNER DELI" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+What do diners say about The Plant-Based Pantry?
+
+RESPONSE:
+GET REVIEW "THE PLANT-BASED PANTRY" 5
+SUMMARIZE REVIEWS 
+
+QUERY:
+I’m planning to visit Smoky’s BBQ. Any helpful tips?
+
+RESPONSE:
+GET TIPS "SMOKY’S BBQ" 5
+SUMMARIZE TIPS 
+
+QUERY:
+What should I know before dining at La Bella Pasta?
+
+RESPONSE:
+GET TIPS "LA BELLA PASTA" 5
+SUMMARIZE TIPS 
+
+QUERY:
+Any advice for first-time visitors to Daily Dose Coffee?
+
+RESPONSE:
+GET TIPS "DAILY DOSE COFFEE" 5
+SUMMARIZE TIPS 
+
+QUERY:
+I’m heading to The Elegant Spoon tonight. What should I expect?
+
+RESPONSE:
+GET TIPS "THE ELEGANT SPOON" 5
+SUMMARIZE TIPS 
+
+QUERY:
+Share some insider tips for enjoying Ocean’s Delight Sushi.
+
+RESPONSE:
+GET TIPS "OCEAN’S DELIGHT SUSHI" 5
+SUMMARIZE TIPS 
+
+QUERY:
+Before I grab tacos at Fiesta Mexicana, what should I know?
+
+RESPONSE:
+GET TIPS "FIESTA MEXICANA" 5
+SUMMARIZE TIPS 
+
+QUERY:
+I’m considering The Homestyle Kitchen for dinner. Any suggestions?
+
+RESPONSE:
+GET TIPS "THE HOMESTYLE KITCHEN" 5
+SUMMARIZE TIPS 
+
+QUERY:
+What’s useful to know about visiting Fresh Greens Vegan Café?
+
+RESPONSE:
+GET TIPS "FRESH GREENS VEGAN CAFÉ" 5
+SUMMARIZE TIPS 
