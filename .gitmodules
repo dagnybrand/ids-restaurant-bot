@@ -1,0 +1,3 @@
+[submodule "jam"]
+	path = jam
+	url = git@github.com:apcl-research/jam.git
