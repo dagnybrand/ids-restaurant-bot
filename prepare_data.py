@@ -50,13 +50,13 @@ if __name__=='__main__':
         mergeable_ranks=enc._mergeable_ranks,
         special_tokens={
             **enc._special_tokens,
-            '<|start_fn|>' : 100264,
-            '<|end_fn|>' : 100265,
+            '<|start_fn|>' : 50001,
+            '<|end_fn|>' : 50002,
         }
     )
 
     def process(example):
-        ids = enc_fn.encode(example['text'], allowed_special={'<|start_fn|>', '<|end_fn|>'}) # encode_ordinary ignores any special tokens
+        ids = enc_fn.encode(example['text'], allowed_special={'<|start_fn|>', '<|end_fn|>', '<|endoftext|>'}) # encode_ordinary ignores any special tokens
         ids = ids[:seqlen-1]
         ids.append(enc_fn.eot_token) # add the end of text token, e.g. 50256 for gpt2 bpe
         #if len(ids) < seqlen:
@@ -66,7 +66,6 @@ if __name__=='__main__':
         #quit()
         # note: I think eot should be prepended not appended... hmm. it's called "eot" though...
         out = {'ids': ids, 'len': len(ids)}
-        print(out)
         return out
 
     # tokenize the dataset
@@ -81,7 +80,7 @@ if __name__=='__main__':
     for split, dset in tokenized.items():
         arr_len = np.sum(dset['len'])
         filename = os.path.join('.', f'{OUT_DIR}/{split}.bin')
-        dtype = np.uint32 # (can do since enc.max_token_value == 50256 is < 2**16)
+        dtype = np.uint16 # (can do since enc.max_token_value == 50256 is < 2**16)
         arr = np.memmap(filename, dtype=dtype, mode='w+', shape=(arr_len,))
 
         print(f"writing {filename}...")
