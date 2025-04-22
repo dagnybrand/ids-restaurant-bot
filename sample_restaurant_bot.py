@@ -6,7 +6,7 @@ import pickle
 from contextlib import nullcontext
 import torch
 import tiktoken
-from model import GPTConfig, GPT
+from jam.model import GPTConfig, GPT
 
 from review_client import ReviewClient
 from gpt_client import GPTClient
