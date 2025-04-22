@@ -8,6 +8,11 @@ import torch
 import tiktoken
 from model import GPTConfig, GPT
 
+from review_client import ReviewClient
+from gpt_client import GPTClient
+
+OPENAI_KEY = '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'
+
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')
 out_dir = 'out' # ignored if init_from is not 'resume'
@@ -85,7 +90,6 @@ else:
         if 50001 in l:
             if not 50002 in l:
                 print("Warning: <|start_fn|> token found but no <|end_fn|> token found")
-                exit()
             else:
                 return enc_fn.decode(l[:l.index(50001)]) + "<|start_fn|>" + enc_fn.decode(l[l.index(50001) + 1: l.index(50002)]) + "<|end_fn|>" + enc_fn.decode(l[l.index(50002) + 1:])
         else:
@@ -114,6 +118,26 @@ with torch.no_grad():
             #         ret.append(x)
             ret = decode(y[0].tolist())
             ret = ret[:ret.find('<|endoftext|>')]
-
             print(ret)
             print('---------------')
+
+ret = ret[ret.find('<|start_fn|>') + len('<|start_fn|>'): ret.find('<|end_fn|>')].strip()
+print(ret)
+rc = ReviewClient('../data')
+inputs = ret.split(' ')
+print(inputs)
+if inputs[0] == 'GET':
+    if inputs[1] == 'RESTAURANT':
+        df = rc.get_restaurants(inputs[2].lower().strip("\""), ' '.join(inputs[3:-1]).lower().strip("\""), int(inputs[-1]))
+    elif inputs[1] == 'REVIEWS':
+        df = rc.get_reviews(inputs[2].lower().strip("\""), int(inputs[3]))
+    elif inputs[1] == 'TIPS':
+        df = rc.get_tips(inputs[2].lower().strip("\""), int(inputs[3]))
+
+print(df)
+
+df = rc.get_restaurants('Indianapolis', 'Sports Bars', 5)
+print(df)
+gpt = GPTClient(OPENAI_KEY)
+summary = gpt.summarize_businesses(df)
+print(summary)

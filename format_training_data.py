@@ -12,6 +12,7 @@ for i in range(len(groups) // 2):
     query = groups[i * 2].strip()
     response = groups[i * 2 + 1].strip()
     header, fetch_cmd, format_cmd = response.split("\n", maxsplit=2)
+    fetch_cmd = fetch_cmd.replace('"', '')
     examples.append((query, header, fetch_cmd))
 
 if not os.path.exists(OUT_DIR):

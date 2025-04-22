@@ -2,3 +2,4 @@ data
 lib
 *_data
 tmp
+venv
