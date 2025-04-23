@@ -1,4 +1,5 @@
 import os
+import re
 
 OUT_DIR = 'tmp'
 
@@ -12,8 +13,11 @@ for i in range(len(groups) // 2):
     query = groups[i * 2].strip()
     response = groups[i * 2 + 1].strip()
     header, fetch_cmd, format_cmd = response.split("\n", maxsplit=2)
-    fetch_cmd = fetch_cmd.replace('"', '')
-    examples.append((query, header, fetch_cmd))
+    get, cmd, args = fetch_cmd.split(" ", maxsplit=2)
+    split_args = [x.strip().lstrip() for x in args.split("\"") if x.strip().lstrip() != '']
+    new_cmd = f"{get} {cmd} " + ", ".join(split_args)
+
+    examples.append((query, header, new_cmd))
 
 if not os.path.exists(OUT_DIR):
     os.mkdir(OUT_DIR)
