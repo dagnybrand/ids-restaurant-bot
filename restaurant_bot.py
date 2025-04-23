@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+
 from gpt_client import GPTClient
 from review_client import ReviewClient
 from restaurant_model import RestaurantModel
@@ -37,10 +40,12 @@ class RestaurantBot:
         return summary        
 
 if __name__ == '__main__':
+    load_dotenv()
+
     bot = RestaurantBot(
         data_dir='data/yelp',
         model_dir='jam/out-restaurant-bot',
-        gpt_api_key='your_gpt_api_key_here'
+        gpt_api_key=os.getenv("OPENAI_KEY")
     )
     while True:
         query = input("Ask me about restaurants: ")
