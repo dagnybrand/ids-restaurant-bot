@@ -2,6 +2,7 @@ from gpt_client import GPTClient
 from review_client import ReviewClient
 from restaurant_model import RestaurantModel
 
+
 class RestaurantBot:
     def __init__(self, data_dir: str, model_dir:str, gpt_api_key: str):
         self.review_client = ReviewClient(data_dir=data_dir)
