@@ -11,8 +11,6 @@ from model import GPTConfig, GPT
 from review_client import ReviewClient
 from gpt_client import GPTClient
 
-OPENAI_KEY = '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'
-
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')
 out_dir = 'out' # ignored if init_from is not 'resume'
