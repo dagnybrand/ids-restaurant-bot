@@ -38,7 +38,7 @@ if __name__=='__main__':
 
     dataset = load_dataset('text', data_files={'train': txtfiles}, sample_by="document")
 
-    split_dataset = dataset['train'].train_test_split(test_size=0.02, seed=2357, shuffle=True)
+    split_dataset = dataset['train'].train_test_split(test_size=0.05, seed=2357, shuffle=True)
     split_dataset['val'] = split_dataset.pop('test') # rename the test split to val
 
     # we now want to tokenize the dataset. first define the encoding function (gpt2 bpe)

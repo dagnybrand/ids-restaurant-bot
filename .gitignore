@@ -3,3 +3,5 @@ lib
 *_data
 tmp
 venv
+**/__pycache__
+**/out-*

@@ -6,18 +6,13 @@ import pickle
 from contextlib import nullcontext
 import torch
 import tiktoken
-from jam.model import GPTConfig, GPT
-
-from review_client import ReviewClient
-from gpt_client import GPTClient
-
-OPENAI_KEY = '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'
+from model import GPTConfig, GPT
 
 # -----------------------------------------------------------------------------
 init_from = 'resume' # either 'resume' (from an out_dir) or a gpt2 variant (e.g. 'gpt2-xl')
 out_dir = 'out' # ignored if init_from is not 'resume'
-start = "FILE:prompt.txt" # or "<|endoftext|>" or etc. Can also specify a file, use as: "FILE:prompt.txt"
-num_samples = 1 # number of samples to draw
+start = "\n" # or "<|endoftext|>" or etc. Can also specify a file, use as: "FILE:prompt.txt"
+num_samples = 10 # number of samples to draw
 max_new_tokens = 500 # number of tokens generated in each sample
 temperature = 0.8 # 1.0 = no change, < 1.0 = less random, > 1.0 = more random, in predictions
 top_k = 200 # retain only the top_k most likely tokens, clamp others to have 0 probability
@@ -75,28 +70,8 @@ else:
     # ok let's assume gpt-2 encodings by default
     print("No meta.pkl found, assuming GPT-2 encodings...")
     enc = tiktoken.get_encoding("gpt2")
-
-    enc_fn = tiktoken.Encoding(
-        name="gpt2-restaurant-bot",
-        pat_str=enc._pat_str,
-        mergeable_ranks=enc._mergeable_ranks,
-        special_tokens={
-            **enc._special_tokens,
-            '<|start_fn|>' : 50001,
-            '<|end_fn|>' : 50002,
-        }
-    )
-    def decode(l):
-        if 50001 in l:
-            if not 50002 in l:
-                print("Warning: <|start_fn|> token found but no <|end_fn|> token found")
-            else:
-                return enc_fn.decode(l[:l.index(50001)]) + "<|start_fn|>" + enc_fn.decode(l[l.index(50001) + 1: l.index(50002)]) + "<|end_fn|>" + enc_fn.decode(l[l.index(50002) + 1:])
-        else:
-            return enc_fn.decode(l)
-        
-    encode = lambda s: enc_fn.encode(s, allowed_special={"<|endoftext|>", "<|start_fn|>", "<|end_fn|>"})
-    #decode = lambda l: enc_fn.decode(l)
+    encode = lambda s: enc.encode(s, allowed_special={"<|endoftext|>"})
+    decode = lambda l: enc.decode(l)
 
 # encode the beginning of the prompt
 if start.startswith('FILE:'):
@@ -110,34 +85,5 @@ with torch.no_grad():
     with ctx:
         for k in range(num_samples):
             y = model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
-            # ret = []
-            # for x in y[0].tolist():
-            #     if x not in enc_fn._special_tokens.values():
-            #         ret.append(decode([x]))
-            #     else:
-            #         ret.append(x)
-            ret = decode(y[0].tolist())
-            ret = ret[:ret.find('<|endoftext|>')]
-            print(ret)
+            print(decode(y[0].tolist()))
             print('---------------')
-
-ret = ret[ret.find('<|start_fn|>') + len('<|start_fn|>'): ret.find('<|end_fn|>')].strip()
-print(ret)
-rc = ReviewClient('../data')
-inputs = ret.split(' ')
-print(inputs)
-if inputs[0] == 'GET':
-    if inputs[1] == 'RESTAURANT':
-        df = rc.get_restaurants(inputs[2].lower().strip("\""), ' '.join(inputs[3:-1]).lower().strip("\""), int(inputs[-1]))
-    elif inputs[1] == 'REVIEWS':
-        df = rc.get_reviews(inputs[2].lower().strip("\""), int(inputs[3]))
-    elif inputs[1] == 'TIPS':
-        df = rc.get_tips(inputs[2].lower().strip("\""), int(inputs[3]))
-
-print(df)
-
-df = rc.get_restaurants('Indianapolis', 'Sports Bars', 5)
-print(df)
-gpt = GPTClient(OPENAI_KEY)
-summary = gpt.summarize_businesses(df)
-print(summary)
