@@ -12,4 +12,4 @@ PROMPT_OPTIONS = [
 
 class Prompt(Message):
     def to_text(self) -> str:
-        return random.choice(PROMPT_OPTIONS) 
+        return random.choice(PROMPT_OPTIONS)  + " (Or type 'exit' to end the conversation.)"

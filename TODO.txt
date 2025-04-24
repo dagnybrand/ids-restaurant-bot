@@ -5,8 +5,8 @@
     - Add counts/limits for the number of restaurants/reviews to the training data [ ]
     - Parse the number if it exists in the output, otherwise use the default [ ]
 - Create conversation flow
-    - Add greeting [ ]
-    - Add opportunity to add follow up question or exit [ ]
+    - Add greeting [x]
+    - Add opportunity to add follow up question or exit [x]
 - Add memory
     - Keep history of previous restaurants and queries for use in filling in future questions [ ]
 - Clean up file structure [x]
