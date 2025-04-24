@@ -1,4 +1,4 @@
-- Handle off-topic questions
+- Handle off-topic questions [ ]
     - Add random text/questions to the training data [ ]
     - Add not-relevant messaging to the output [ ]
 - Add counts/limits [x]
@@ -7,7 +7,7 @@
 - Create conversation flow [x]
     - Add greeting [x]
     - Add opportunity to add follow up question or exit [x]
-- Add memory
+- Add memory [ ]
     - Keep history of previous restaurants and queries for use in filling in future questions [ ]
 - Clean up file structure [x]
 - Presentation [ ]
