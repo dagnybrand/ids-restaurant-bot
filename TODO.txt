@@ -1,10 +1,10 @@
 - Handle off-topic questions
     - Add random text/questions to the training data [ ]
     - Add not-relevant messaging to the output [ ]
-- Add counts/limits
-    - Add counts/limits for the number of restaurants/reviews to the training data [ ]
-    - Parse the number if it exists in the output, otherwise use the default [ ]
-- Create conversation flow
+- Add counts/limits [x]
+    - Add counts/limits for the number of restaurants/reviews to the training data [x]
+    - Parse the number if it exists in the output, otherwise use the default [x]
+- Create conversation flow [x]
     - Add greeting [x]
     - Add opportunity to add follow up question or exit [x]
 - Add memory
