@@ -49,8 +49,7 @@ review_examples = []
 for _ in tqdm(range(20000)):
     template = random.choice(review_templates)
     restaurant = random.choice(restaurants)
-    number = random.randint(1, 5)
-    review_query = template.replace("{restaurant}", restaurant).replace("{number}", str(number))
+    review_query = template.replace("{restaurant}", restaurant)
     review_examples.append(f"Query:\n{review_query}\nResponse:\n<|start_fn|> GET REVIEWS {restaurant} <|end_fn|>\n")
 
 restaurant_examples = []
@@ -60,7 +59,10 @@ for _ in tqdm(range(20000)):
     category = random.choice(categories)
     number = random.randint(1, 5)
     restaurant_query = template.replace("{city}", city).replace("{category}", category).replace("{number}", str(number))
-    restaurant_examples.append(f"Query:\n{restaurant_query}\nResponse:\n<|start_fn|> GET RESTAURANTS {city}, {category} <|end_fn|>\n")
+    if "{number}" in template:
+        restaurant_examples.append(f"Query:\n{restaurant_query}\nResponse:\n<|start_fn|> GET RESTAURANTS {city}, {category}, {number} <|end_fn|>\n")
+    else:
+        restaurant_examples.append(f"Query:\n{restaurant_query}\nResponse:\n<|start_fn|> GET RESTAURANTS {city}, {category} <|end_fn|>\n")
 
 examples = restaurant_examples + review_examples + tip_examples
 random.shuffle(examples)
