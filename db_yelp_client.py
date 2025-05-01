@@ -1,7 +1,7 @@
 import clickhouse_connect
 import pandas as pd
 
-class ReviewClient:
+class DatabaseYelpClient:
     def __init__(self, db_host: str = 'localhost', db_port: int = 8123):
         self.host = db_host
         self.port = db_port
@@ -64,6 +64,6 @@ class ReviewClient:
         return df
     
 if __name__ == '__main__':
-    client = ReviewClient()
+    client = DatabaseYelpClient()
     restaurants = client.get_restaurants('Tampa', 'Burger', 5)
     print(restaurants)

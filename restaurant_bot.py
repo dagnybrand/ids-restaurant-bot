@@ -3,14 +3,16 @@ from dotenv import load_dotenv
 
 from document_planner import DocumentPlanner
 from gpt_client import GPTClient
-from review_client import ReviewClient
+from yelp_client import YelpClient
+from file_yelp_client import FileYelpClient
+from db_yelp_client import DatabaseYelpClient
 from restaurant_model import RestaurantModel
 from messages import GreetingExit, Query
 
 
 class RestaurantBot:
-    def __init__(self, model_dir:str, gpt_api_key: str) -> None:
-        review_client = ReviewClient()
+    def __init__(self, model_dir:str, gpt_api_key: str, data_dir: str | None = None) -> None:
+        review_client: YelpClient = FileYelpClient(data_dir=data_dir) if data_dir is not None else DatabaseYelpClient()
         gpt_client = GPTClient(api_key=gpt_api_key)
         model = RestaurantModel()
         model.load(model_dir)
@@ -34,7 +36,8 @@ if __name__ == '__main__':
 
     bot = RestaurantBot(
         model_dir='jam/out-restaurant-bot',
-        gpt_api_key=os.getenv("OPENAI_KEY")
+        gpt_api_key=os.getenv("OPENAI_KEY"),
+        data_dir='./data/yelp'
     )
     
     bot.run()

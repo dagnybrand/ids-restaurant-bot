@@ -8,7 +8,7 @@ import torch
 import tiktoken
 from model import GPTConfig, GPT
 
-from review_client import ReviewClient
+from file_yelp_client import FileYelpClient
 from gpt_client import GPTClient
 
 # -----------------------------------------------------------------------------
@@ -121,7 +121,7 @@ with torch.no_grad():
 
 ret = ret[ret.find('<|start_fn|>') + len('<|start_fn|>'): ret.find('<|end_fn|>')].strip()
 print(ret)
-rc = ReviewClient('../data/yelp')
+rc = FileYelpClient('../data/yelp')
 get, resource, args = ret.split(' ', maxsplit=2)
 args = [x.strip().lstrip() for x in args.split(',') if x.strip().lstrip() != '']
 print(args)
