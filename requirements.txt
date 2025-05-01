@@ -1,4 +1,4 @@
-chdb
 openai
 pandas
 dotenv
+clickhouse-connect

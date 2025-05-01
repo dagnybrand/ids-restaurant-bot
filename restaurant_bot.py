@@ -9,8 +9,8 @@ from messages import GreetingExit, Query
 
 
 class RestaurantBot:
-    def __init__(self, data_dir: str, model_dir:str, gpt_api_key: str):
-        review_client = ReviewClient(data_dir=data_dir)
+    def __init__(self, model_dir:str, gpt_api_key: str) -> None:
+        review_client = ReviewClient()
         gpt_client = GPTClient(api_key=gpt_api_key)
         model = RestaurantModel()
         model.load(model_dir)
@@ -33,7 +33,6 @@ if __name__ == '__main__':
     load_dotenv()
 
     bot = RestaurantBot(
-        data_dir='data/yelp',
         model_dir='jam/out-restaurant-bot',
         gpt_api_key=os.getenv("OPENAI_KEY")
     )

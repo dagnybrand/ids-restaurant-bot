@@ -2,6 +2,7 @@ from gpt_client import GPTClient
 from review_client import ReviewClient
 from restaurant_model import RestaurantModel
 from messages import Message, GreetingStart, GreetingExit, Query, ExitQuery, Response, RestaurantQuery, ReviewQuery, TipQuery, QueryType
+import time
 
 class DocumentPlanner:
     def __init__(self, review_client: ReviewClient, gpt_client: GPTClient, model: RestaurantModel):
@@ -42,7 +43,9 @@ class DocumentPlanner:
 
     def add_message(self, message: Message):
         if type(message) == Query:
+            start = time.time()
             message = self.parse_query(message.to_text())
+            print(f"Query parsing took {time.time() - start:.2f} seconds")
 
         self.messages.append(message)
 
@@ -53,10 +56,14 @@ class DocumentPlanner:
         if len(self.messages) == 0:
             next_message =  GreetingStart()
         elif type(last_message) == RestaurantQuery:
+            start = time.time()
             restaurants = self.review_client.get_restaurants(last_message.city, last_message.cuisine, last_message.limit)
+            print(f"Restaurant query took {time.time() - start:.2f} seconds")
             self.curr_restaurant_list = restaurants
             self.curr_city = last_message.city
+            start = time.time()
             summary = self.gpt_client.summarize_businesses(restaurants)
+            print(f"Restaurant summarization took {time.time() - start:.2f} seconds")
             next_message = Response(data=restaurants, text=summary, query_type=QueryType.RESTAURANT)
         elif type(last_message) == ReviewQuery:
             reviews = self.review_client.get_reviews(last_message.restaurant_name, last_message.limit)
