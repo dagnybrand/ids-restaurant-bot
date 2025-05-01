@@ -65,7 +65,7 @@ class DocumentPlanner:
             next_message = Response(data=reviews, text=summary, query_type=QueryType.REVIEW)
         elif type(last_message) == TipQuery:
             tips = self.review_client.get_tips(last_message.restaurant, last_message.limit)
-            self.curr_restaurant = last_message.restaurant_name
+            self.curr_restaurant = last_message.restaurant
             summary = self.gpt_client.summarize_tips(tips)
             next_message = Response(data=tips, text=summary, query_type=QueryType.TIP)
         elif type(last_message) == ExitQuery:
