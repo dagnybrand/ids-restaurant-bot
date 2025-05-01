@@ -3,10 +3,7 @@ import pandas as pd
 
 class DatabaseYelpClient:
     def __init__(self, db_host: str = 'localhost', db_port: int = 8123):
-        self.host = db_host
-        self.port = db_port
-
-        self.client = clickhouse_connect.get_client(host=self.host, port=self.port)
+        self.client = clickhouse_connect.get_client(host=db_host, port=db_port)
 
     def __find_business_id_by_name(self, business_name: str) -> str | None:
         query = """
@@ -62,8 +59,3 @@ class DatabaseYelpClient:
 
         df = self.client.query_df(query, parameters=parameters)
         return df
-    
-if __name__ == '__main__':
-    client = DatabaseYelpClient()
-    restaurants = client.get_restaurants('Tampa', 'Burger', 5)
-    print(restaurants)

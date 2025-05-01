@@ -16,11 +16,15 @@ class DocumentPlanner:
 
         self.messages: list[Message] = []
     
+    def __format_query(self, query: str) -> str:
+        return f"QUERY:\n{query}\nRESPONSE:\n"
+    
     def parse_query(self, query: str) -> Message | None:
         if query.strip().lower() in ['exit', 'quit']:
             return ExitQuery()
         
-        result = self.model.generate(f"QUERY:\n{query}\nRESPONSE:\n")
+        result = self.model.generate(self.__format_query(query))
+
         result = result[result.find('<|start_fn|>') + len('<|start_fn|>'): result.find('<|end_fn|>')].strip()
         get, resource, args = result.split(' ', maxsplit=2)
         args = [x.strip().lstrip() for x in args.split(',') if x.strip().lstrip() != '']
@@ -43,9 +47,7 @@ class DocumentPlanner:
 
     def add_message(self, message: Message):
         if type(message) == Query:
-            start = time.time()
             message = self.parse_query(message.to_text())
-            print(f"Query parsing took {time.time() - start:.2f} seconds")
 
         self.messages.append(message)
 
@@ -56,14 +58,10 @@ class DocumentPlanner:
         if len(self.messages) == 0:
             next_message =  GreetingStart()
         elif type(last_message) == RestaurantQuery:
-            start = time.time()
             restaurants = self.review_client.get_restaurants(last_message.city, last_message.cuisine, last_message.limit)
-            print(f"Restaurant query took {time.time() - start:.2f} seconds")
             self.curr_restaurant_list = restaurants
             self.curr_city = last_message.city
-            start = time.time()
             summary = self.gpt_client.summarize_businesses(restaurants)
-            print(f"Restaurant summarization took {time.time() - start:.2f} seconds")
             next_message = Response(data=restaurants, text=summary, query_type=QueryType.RESTAURANT)
         elif type(last_message) == ReviewQuery:
             reviews = self.review_client.get_reviews(last_message.restaurant_name, last_message.limit)

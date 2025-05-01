@@ -1,9 +1,10 @@
 import os
-from contextlib import nullcontext
 import torch
 import tiktoken
-from jam.model import GPTConfig, GPT
+from contextlib import nullcontext
 from typing import Literal
+
+from jam.model import GPTConfig, GPT
 
 SEED = 1337
 
@@ -18,12 +19,12 @@ class RestaurantModel:
 
         torch.manual_seed(SEED)
         torch.cuda.manual_seed(SEED)
-        torch.backends.cuda.matmul.allow_tf32 = True # allow tf32 on matmul
-        torch.backends.cudnn.allow_tf32 = True # allow tf32 on cudnn
-        device_type = 'cuda' if 'cuda' in self.device else 'cpu' # for later use in torch.autocast
+        torch.backends.cuda.matmul.allow_tf32 = True 
+        torch.backends.cudnn.allow_tf32 = True 
+        device_type = 'cuda' if 'cuda' in self.device else 'cpu'
         self.ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=torch.bfloat16)
 
-    def load_encoding(self):
+    def load_encoding(self) -> None:
         gpt_enc = tiktoken.get_encoding("gpt2")
         enc = tiktoken.Encoding(
             name="gpt2-restaurant-bot",
@@ -51,7 +52,7 @@ class RestaurantModel:
         self.decode = decode
         self.encode = encode
 
-    def load(self, out_dir: str):
+    def load(self, out_dir: str) -> None:
         checkpoint = torch.load(os.path.join(out_dir, 'ckpt.pt'), map_location=self.device)
         self.model = GPT(GPTConfig(**checkpoint['model_args']))
         state_dict = checkpoint['model']
@@ -63,16 +64,15 @@ class RestaurantModel:
         self.model.eval()
         self.model.to(self.device)
         if self.compile:
-            self.model = torch.compile(self.model) # requires PyTorch 2.0 (optional)
+            self.model = torch.compile(self.model)
     
     def generate(self, prompt:str, num_samples: int = 1, max_new_tokens: int = 500, temperature: float = 0.8, top_k: int = 200) -> str:
         start_ids = self.encode(prompt)
         x = (torch.tensor(start_ids, dtype=torch.long, device=self.device)[None, ...])
 
-        # run generation
         with torch.no_grad():
             with self.ctx:
-                for k in range(num_samples):
+                for _ in range(num_samples):
                     y = self.model.generate(x, max_new_tokens, temperature=temperature, top_k=top_k)
                     ret = self.decode(y[0].tolist())
                     ret = ret[:ret.find('<|endoftext|>')]

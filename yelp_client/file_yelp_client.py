@@ -55,9 +55,3 @@ class FileYelpClient:
         df = chdb.query(query, "Dataframe")
         df['date'] = pd.to_datetime(df['date'], unit = 's')
         return df
-    
-if __name__ == '__main__':
-    rc = FileYelpClient('./indianapolis_data')
-    df= rc.get_restaurants("Indianapolis", "American", limit=5).to_string(index=False)
-    # df = rc.get("Yannis Golden Gyros", sort='t.date DESC', limit=5).to_string(index=False)
-    print(df)
