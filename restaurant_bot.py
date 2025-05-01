@@ -3,9 +3,7 @@ from dotenv import load_dotenv
 
 from document_planner import DocumentPlanner
 from gpt_client import GPTClient
-from yelp_client import YelpClient
-from file_yelp_client import FileYelpClient
-from db_yelp_client import DatabaseYelpClient
+from yelp_client import YelpClient, FileYelpClient, DatabaseYelpClient
 from restaurant_model import RestaurantModel
 from messages import GreetingExit, Query
 
