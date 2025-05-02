@@ -3,11 +3,11 @@
 **Dagny Brand and Zach Brown**
 
 ## Running Locally
-### Clone the Repository
-1. Clone the directory with `git clone git@github.com:dagnybrand/ids-restaurant-bot.git`
+### Access the Repository
+1. Find the code at `/data/cse40982/students/zbrown2/ids-restaurant-bot` on gpu00 or clone the repository with `git clone git@github.com:dagnybrand/ids-restaurant-bot.git`
 
 ### Find Yelp Data
-1. Ensure access to `/data/cse40982/students/dbrand/project/ids-restaurant-bot/data/` or download the data 
+1. Ensure access to `/data/cse40982/students/dbrand/project/ids-restaurant-bot/data/` or download the data at https://business.yelp.com/data/resources/open-dataset/
 
 ### Install Dependencies
 1. Create and activate a new virtual environment
