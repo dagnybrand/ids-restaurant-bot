@@ -1,3 +1,0 @@
-- Add memory [ ]
-    - Keep history of previous restaurants and queries for use in filling in future questions [ ]
-- Update README [ ]
