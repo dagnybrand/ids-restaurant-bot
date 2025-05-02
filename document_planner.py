@@ -21,6 +21,9 @@ class DocumentPlanner:
     def parse_query(self, query: str) -> Message | None:
         if query.strip().lower() in ['exit', 'quit']:
             return ExitQuery()
+
+        if not self.gpt_client.verify_input(query):
+            return Unsure() 
         
         result = self.model.generate(self.__format_query(query))
 

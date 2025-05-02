@@ -27,10 +27,7 @@ class RestaurantBot:
                 break
 
             user_input = input("User: ")
-            if (self.gpt_client.verify_input(user_input)):
-                self.document_planner.add_message(Query(user_input))
-            else: 
-                self.document_planner.add_message(Unsure())
+            self.document_planner.add_message(Query(user_input))
 
 
 if __name__ == '__main__':

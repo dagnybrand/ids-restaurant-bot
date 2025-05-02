@@ -18,7 +18,7 @@ class FileYelpClient:
     def get_restaurants(self, city: str, cuisine: str, limit: int | None = None) -> pd.DataFrame:
         query = f"""
         SELECT b.* FROM '{self.data_dir}/business.json' as b
-        WHERE b.city = '{city.replace("'", "''")}' AND b.is_open=1 AND b.categories LIKE '%{cuisine.replace("'", "''")}%'
+        WHERE b.city = '{city.replace("'", "''")}' AND b.is_open=1 AND b.categories ILIKE '%{cuisine.replace("'", "''")}%'
         ORDER BY (3.5 * 50 + b.review_count * b.stars) / (50 + b.review_count) DESC
         {'LIMIT ' + str(limit) if limit is not None else ''}
         """
