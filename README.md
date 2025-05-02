@@ -2,15 +2,9 @@
 **CSE 40982 Final Project**
 **Dagny Brand and Zach Brown**
 
-### Steps to generate data
-1. Add data to `new_training_data.txt` in QUERY RESPONSE format
-2. Run `format_training_data.py` to split data into seperate files for tokenizing
-3. Temp data files will be located in `tmp\`
-
-### Steps to train model
-1. Run `prepare_data.py` to split data into train, test, and validation sets and to tokenize
-2. From the `jam` directory, run CUDA on `train.py` with `config/train_restaurant_bot.py` as a specification
-3. Trained model will be saved to `jam/restaurant-bot`
-
-### Steps to run model
-1. Run `sample_restaurant_bot.py` from the root directory
+### To Run Model
+1. Install necessary dependencies listed in `requirements.txt`
+2. Upload data to `data/` directory
+3. Run `python restaurant_bot.py` from the root directory to open the chat
+4. Type in a question regarding a restaurant suggetions, tips, or reviews
+- to receive a restaurant suggestion, specify a food type and a city
