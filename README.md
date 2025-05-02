@@ -8,7 +8,7 @@
 1. Find the code at `/data/cse40982/students/zbrown2/ids-restaurant-bot` on gpu00 or clone the repository with `git clone git@github.com:dagnybrand/ids-restaurant-bot.git`
 
 ### Find Yelp Data
-1. Ensure access to `/data/cse40982/students/dbrand/project/ids-restaurant-bot/data/` or download the data at https://business.yelp.com/data/resources/open-dataset/
+1. Ensure access to `/data/cse40982/students/zbrown2/ids-restaurant-bot/data/` or download the data at https://business.yelp.com/data/resources/open-dataset/
 
 ### Install Dependencies
 1. Create and activate a new virtual environment
@@ -16,7 +16,7 @@
 3. Create a `.env` file in the root directory of the project with `OPENAI_KEY` to an OpenAI key
 
 ### Run the Model
-1. Run `python restaurant_bot.py -m {model_dir} -d {yelp_data_dir}` from the root directory to open the chat. `model_dir` is the path to the `ckpt.pt` file for the GPT2 model and defaults to `jam/out-restaurant-bot`. `yelp_data_dir` is the path to the Yelp JSON files, likely `/data/cse40982/students/dbrand/project/ids-restaurant-bot/data/`. If `yelp_data_dir` is not specified, the bot will attempt to connect to a local ClickHouse instance. 
+1. Run `python restaurant_bot.py -m {model_dir} -d {yelp_data_dir}` from the root directory to open the chat. `model_dir` is the path to the `ckpt.pt` file for the GPT2 model and defaults to `jam/out-restaurant-bot`. `yelp_data_dir` is the path to the Yelp JSON files, likely `/data/cse40982/students/zbrown2/ids-restaurant-bot/data/`. If `yelp_data_dir` is not specified, the bot will attempt to connect to a local ClickHouse instance. 
 2. Type in a question regarding a restaurant suggetions, tips, or reviews
 - to receive a restaurant suggestion, specify a food type and a city
 3. Type `exit` or `quit` to stop
