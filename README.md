@@ -4,11 +4,11 @@
 **Dagny Brand and Zach Brown**
 
 ## Running Locally
-### Clone the Repository
-1. Clone the directory with `git clone git@github.com:dagnybrand/ids-restaurant-bot.git`
+### Access the Repository
+1. Find the code at `/data/cse40982/students/zbrown2/ids-restaurant-bot` on gpu00 or clone the repository with `git clone git@github.com:dagnybrand/ids-restaurant-bot.git`
 
 ### Find Yelp Data
-1. Ensure access to `/data/cse40982/students/dbrand/project/ids-restaurant-bot/data/` or download the data 
+1. Ensure access to `/data/cse40982/students/dbrand/project/ids-restaurant-bot/data/` or download the data at https://business.yelp.com/data/resources/open-dataset/
 
 ### Install Dependencies
 1. Create and activate a new virtual environment
@@ -42,3 +42,11 @@ This repository contains the files needed to train and run our ChatBot, which ta
 - The `prepare_data.py` file contains functionality to prepare the training data for model training and validation
 - The `restaurant_bot.py` file contains functionality for the user/system interface and is the file that is run for the overall chatbot
 - The `restaurant_model.py` file contains functionality to use our restuarant model for generating queries based on user input.
+
+
+## Yelp Data Options
+Yelp provides this data as 5 JSON files with some as large as 5+ GB. These files can be large and difficult to parse. Attempting to load them into memory using the json library or pandas either took far too long or was not supported on this machine. We found two possible options to better search these files, each with their own pros and cons. 
+### JSON Files (Default)
+The first option is keeping the data in its native format as JSON files and searching the files using `chdb` a limited, yet powerful Python ClickHouse library. This option is the simplest as nothing has to be changed about the data. The queries in our system can take up to around 10 seconds using this option. However, the resource consumption is reasonable.
+### ClickHouse Database
+The other option is making this data available through a ClickHouse server. All of the pieces to run the server are available at `/data/cse40982/students/zbrown2/ids-restaurant-bot/db`, where the data is already loaded in. To start the server, in that directory run `./clickhouse server -C config.xml`. Then, the restaurant bot can be run the same as above, but without providing a data directory CLI argument. Based on initial tests, this option can be up to 100x faster than keeping the data in the JSON files. However, it consumes a vast amount of resources and resulted in me getting kicked off of gpu00 for running too many processes and maybe using too much memory. For the highest level of performance, this option is definitely preferable; however, it may not be practical with the constraints of gpu00. 
