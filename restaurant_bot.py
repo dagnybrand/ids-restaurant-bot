@@ -1,3 +1,4 @@
+import argparse
 import os
 from dotenv import load_dotenv
 
@@ -31,12 +32,17 @@ class RestaurantBot:
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Restaurant Bot')
+    parser.add_argument('-d', '--data-dir', type=str, help='Directory where the Yelp data is stored')
+    parser.add_argument('-m', '--model-dir', type=str, default='jam/out-restaurant-bot', help='Directory where the model is stored')
+    args = parser.parse_args()
+
     load_dotenv()
 
     bot = RestaurantBot(
-        model_dir='jam/out-restaurant-bot',
+        model_dir=args.model_dir,
         gpt_api_key=os.getenv("OPENAI_KEY"),
-        data_dir='./data/yelp'
+        data_dir=args.data_dir if args.data_dir else None
     )
     
     bot.run()
