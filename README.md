@@ -8,6 +8,7 @@
 ### Install Dependencies
 1. Create virtual environment
 2. Install necessary dependencies listed in `requirements.txt`
+3. Set the environment variable `OPENAI_KEY` to an OpenAI key
 
 ### To Train Model
 1. From the root directory, run `generate_training_data.py`
