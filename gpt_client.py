@@ -59,3 +59,15 @@ class GPTClient:
         """
 
         return self.ask_gpt(prompt)
+    
+    def verify_input(self, q: str) -> bool:
+        prompt = f"Does the following sentence have to do with a restuarant? Please response with YES or NO: \n {q}"
+
+        response = self.ask_gpt(prompt)
+
+        if "YES" in response or "yes" in response:
+            return True
+        elif "NO" in response or "no" in response:
+            return False
+        else:
+            self.verify_input(q)

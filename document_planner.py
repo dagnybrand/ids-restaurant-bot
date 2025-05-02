@@ -1,7 +1,7 @@
 from gpt_client import GPTClient
 from yelp_client import YelpClient
 from restaurant_model import RestaurantModel
-from messages import Message, GreetingStart, GreetingExit, Query, ExitQuery, Response, RestaurantQuery, ReviewQuery, TipQuery, QueryType
+from messages import Message, GreetingStart, GreetingExit, Query, ExitQuery, Response, RestaurantQuery, ReviewQuery, TipQuery, QueryType, Unsure
 import time
 
 class DocumentPlanner:
