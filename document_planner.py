@@ -9,10 +9,6 @@ class DocumentPlanner:
         self.gpt_client = gpt_client
         self.model = model
 
-        self.curr_restaurant_list = None
-        self.curr_restaurant = None
-        self.curr_city = None
-
         self.messages: list[Message] = []
     
     def __format_query(self, query: str) -> str:
@@ -61,18 +57,14 @@ class DocumentPlanner:
             next_message =  GreetingStart()
         elif type(last_message) == RestaurantQuery:
             restaurants = self.review_client.get_restaurants(last_message.city, last_message.cuisine, last_message.limit)
-            self.curr_restaurant_list = restaurants
-            self.curr_city = last_message.city
             summary = self.gpt_client.summarize_businesses(restaurants)
             next_message = Response(data=restaurants, text=summary, query_type=QueryType.RESTAURANT)
         elif type(last_message) == ReviewQuery:
             reviews = self.review_client.get_reviews(last_message.restaurant_name, last_message.limit)
-            self.curr_restaurant = last_message.restaurant_name
             summary = self.gpt_client.summarize_reviews(reviews)
             next_message = Response(data=reviews, text=summary, query_type=QueryType.REVIEW)
         elif type(last_message) == TipQuery:
             tips = self.review_client.get_tips(last_message.restaurant, last_message.limit)
-            self.curr_restaurant = last_message.restaurant
             summary = self.gpt_client.summarize_tips(tips)
             next_message = Response(data=tips, text=summary, query_type=QueryType.TIP)
         elif type(last_message) == ExitQuery:
